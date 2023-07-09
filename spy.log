@@ -1,0 +1,7 @@
+1688380949939|1|statement|connection 1|url jdbc:h2:tcp://localhost/~/Downloads/jpashop|     drop table if exists member CASCADE |     drop table if exists member CASCADE 
+1688380949941|0|statement|connection 1|url jdbc:h2:tcp://localhost/~/Downloads/jpashop|     drop sequence if exists hibernate_sequence|     drop sequence if exists hibernate_sequence
+1688380949942|0|statement|connection 2|url jdbc:h2:tcp://localhost/~/Downloads/jpashop|create sequence hibernate_sequence start with 1 increment by 1|create sequence hibernate_sequence start with 1 increment by 1
+1688380949944|1|statement|connection 2|url jdbc:h2:tcp://localhost/~/Downloads/jpashop|     create table member (        id bigint not null,         username varchar(255),         primary key (id)     )|     create table member (        id bigint not null,         username varchar(255),         primary key (id)     )
+1688380950449|5|statement|connection 3|url jdbc:h2:tcp://localhost/~/Downloads/jpashop|call next value for hibernate_sequence|call next value for hibernate_sequence
+1688380950496|0|statement|connection 3|url jdbc:h2:tcp://localhost/~/Downloads/jpashop|insert into member (username, id) values (?, ?)|insert into member (username, id) values ('memberA', 1)
+1688380950499|0|commit|connection 3|url jdbc:h2:tcp://localhost/~/Downloads/jpashop||

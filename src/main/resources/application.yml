@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/Downloads/jpashop; # MVCC : 여러개가 한번에 접근했을 때 좀 더 빨리 처리 가능(권장) 근데 h2 업뎃 이후에 사라졌대
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver # db 소스 설정 완료
+    # 추가적으로 url을 jdbc:h2:mem:test 로 변경 시 메모리에서만 테스트하고 어플리케이션 종료 시 모두 내려줄 수 있다. h2 연결 없이 가능!
+    # 추가적으로 jpa 설정이 없으면 메모리 모드로 알아서 돌려줌 갓프링~ 미쳣다 미쳣어 ㅋㅋ
+
+  jpa:
+    hibernate:
+      ddl-auto: create # 자동으로 테이블 만들어준다. 애플리케이션 실행 시점에 내가 지닌 테이블 다 지우고 다시 생성
+    properties: # hibernate와 관련된 특정 프로퍼티들을 사용할 수 있음
+      hibernate:
+#        show_sql: true 얜 System.out에 찍어줌
+        format_sql: true
+        # 이런 옵션들을 spring boot mannual...을 파보면 된다 ㅠ
+logging:
+  level:
+    org.hibernate.SQL: debug # 하이버네이트가 남기는 모든 로그들을 통해 SQL을 볼 수 있음
+    org.hibernate.type: trace # 뭐가 들어있는지 우측으로 쭉 밀면 보여줭
