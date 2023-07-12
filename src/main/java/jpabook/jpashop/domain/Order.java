@@ -63,4 +63,41 @@ public class Order {
     this.delivery = delivery;
     delivery.setOrder(this);
   } // 양쪽이 서로 영향을 받아야하는 코드일 때, 이런 식으로 한방에
+
+  //== 생성 메서드==//
+  //외부에서 setter  사용을 막기 위해 생성할 때부터 미리 세팅을 해줌..주문할때 뭔가 변경점이 있으면 여기를 고치면 됨
+  public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+    Order order = new Order();
+    order.setMember(member);
+    order.setDelivery(delivery);
+    for (OrderItem orderItem : orderItems) {
+      order.addOrderItem(orderItem);
+    }
+    order.setStatus(OrderStatus.ORDER);
+    order.setOrderDate(LocalDateTime.now());
+    return order;
+  }
+
+  //==비즈니스 로직==//
+  //주문 취소
+  public void cancel() {
+    if (delivery.getStatus() == DeliveryStatus.COMP) {
+      throw new IllegalStateException("이미 배송이 완료된 상품은 취소가 불가능합니다.");
+    }
+
+    this.setStatus(OrderStatus.CANCEL);
+    for (OrderItem orderItem : this.orderItems) {
+      orderItem.cancel();
+    }
+  }
+
+  //==조회 로직==//
+  public int getTotalPrice() {
+    // int totalPrice = orderItems.stream().mapToInt(OrderItem::getTotalPrice).sum();
+    int totalPrice = 0;
+    for (OrderItem orderItem : orderItems) {
+      totalPrice += orderItem.getTotalPrice();
+    }
+    return totalPrice;
+  }
 }
