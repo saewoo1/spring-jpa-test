@@ -19,3 +19,11 @@
    2. service : 비즈니스 로직, 트랜잭션 처리
    3. repository : JPA를 직접 사용하는 계층, 엔티티 매니저 사용
    4. domain : 엔티티가 모여있는 계층, 모든 계층에서 사용
+
+
+6. createMemberForm.html
+   1.  11줄 th:object=${memberForm}
+      1. 이 form이라는 태그 안에서는 MemberForm 객체를 계속 사용한다. method=post
+   2. 14줄 *{name}
+      1. getter, setter를 통한 접근법. memberForm의 name field에 접근한다.
+      2. th:field="~~" th:field 요렇게 작성하면 id, name 똑같이 넣어줌 ex) city -> id= "city", name="city"
