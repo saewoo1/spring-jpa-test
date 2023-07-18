@@ -10,10 +10,7 @@ import jpabook.jpashop.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,11 +44,19 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch,
-                            Model model) {
+    public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
+        //ModerAttribute -> orderSearch가 자동으로 model에 담기게 된다. attribute 안해두댐
+        //값을 뿌릴 수도 있고, 담을 수도 잇음
         List<Order> orders = orderService.findOrders(orderSearch);
         model.addAttribute("orders", orders);
 
         return "order/orderList";
+    }
+
+    @PostMapping("/orders/{orderId}/cancel")
+    public String cancelOrder(@PathVariable("orderId") Long orderId) {
+
+        orderService.cancelOrder(orderId);
+        return "redirect:/orders";
     }
 }
