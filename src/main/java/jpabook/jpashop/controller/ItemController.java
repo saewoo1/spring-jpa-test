@@ -63,19 +63,19 @@ public class ItemController {
         return "items/updateItemForm";
     }
 
-    @PostMapping("itmes/{ItemId}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm bookForm) {
+    @PostMapping("items/{itemId}/edit")
+    public String updateItem(@PathVariable Long itemId,  @ModelAttribute("form") BookForm bookForm) {
 
-        Book book = new Book();
-        book.setId(bookForm.getId());
-        book.setName(bookForm.getName());
-        book.setPrice(bookForm.getPrice());
-        book.setStockQuantity(bookForm.getStockQuantity());
-        book.setAuthor(bookForm.getAuthor());
-        book.setIsbn(bookForm.getIsbn());
+//        Book book = new Book();
+//        book.setId(bookForm.getId());
+//        book.setName(bookForm.getName());
+//        book.setPrice(bookForm.getPrice());
+//        book.setStockQuantity(bookForm.getStockQuantity());
+//        book.setAuthor(bookForm.getAuthor());
+//        book.setIsbn(bookForm.getIsbn());
         // 이런식으로 하나씩 set하는것 보다는 book.change() 이런 식으로 entity단에서 의미있는 변경방식을 추천.
 
-        itemService.saveItem(book); // 우리는 merge 방식으로 준영속 엔티티를 관리했음
+        itemService.updateItem(itemId, bookForm.getName(), bookForm.getPrice(), bookForm.getStockQuantity()); // 우리는 merge 방식으로 준영속 엔티티를 관리했음
 
         // 추가적으로 유저가 임의로 저 itemId값을 변경해도 권한이 없도록 만들어줘야한다..
         return "redirect:items";

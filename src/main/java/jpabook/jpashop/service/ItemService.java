@@ -22,11 +22,11 @@ public class ItemService {
     }
 
     @Transactional
-    public void updateItem(Long itemId, Book param) {
+    public void updateItem(Long itemId, String name, int price, int quantity) {
         Item findItem = itemRepository.findOne(itemId);
-        findItem.setPrice(param.getPrice());
-        findItem.setName(param.getName());
-        findItem.setStockQuantity(param.getStockQuantity());
+        findItem.setPrice(price);
+        findItem.setName(name);
+        findItem.setStockQuantity(quantity);
         /*
         변경감지
         * 더이상 관리받지 못하는 준영속성 entity Book을 수정하는 방법
